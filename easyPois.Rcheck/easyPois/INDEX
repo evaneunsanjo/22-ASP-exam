@@ -1,0 +1,3 @@
+logLik                  Log Likelihood of a Poisson Distribution
+mle                     Returns Maximum Likelihood of a Poisson
+                        Distribution

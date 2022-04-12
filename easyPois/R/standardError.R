@@ -1,0 +1,63 @@
+#' Calculates the standard error of an MLE estimator
+#'
+#' Calculates the standard error using a vector of the data with Poisson distribution
+#'
+#' @param y observed data in vector form
+#' @param SEtype method of calculating the standard error
+#' @param B number of sampling to be done from y in case of bootstrapping. The default is 200.
+#'
+#' @return standard error of mle
+#' @author Eunsan Jo
+#' @examples
+#' set.seed(10)
+#' y <- sample(x=1:10, size=10, replace=TRUE)
+#' standardError(y, SEtype= "basic")
+#' standardError(y, SEtype= "bootstrap")
+#' @rdname standardError
+#' @aliases seCalculate se
+#'
+#' @export
+setGeneric(name="standardError",
+           def=function(y, SEtype, B)
+           {standardGeneric("standardError")}
+)
+
+#' @export
+setMethod(f="standardError",
+          definition=function(y, SEtype = c("basic", "bootstrap"), B=200){
+
+            mle <- function(y){return(sum(y)/length(y))}
+
+            if (SEtype == "basic") {
+              se <- sqrt(mle(y) /length(y))
+
+              return(se)
+
+            }
+
+            if (SEtype == "bootstrap") {
+              matrix <- replicate(B, {
+                return(sample(y, length(y), replace = T))
+              })
+
+              bootmle <- apply(matrix, 2, mle)
+              bootse <- sd(bootmle)
+
+              return(bootse)
+
+            }
+
+            if(any(y < 0)) {
+              stop("For log likelihood, values of y must be greater or equal to 0")
+            }
+
+            if(B <= 0) {
+              stop("For bootstrapping, B must be greater than 0.")
+            }
+
+            if (!(SEtype %in% c("basic", "bootstrap"))) {
+              stop("Please insert a defined method for SEtype.")
+            }
+          }
+)
+
