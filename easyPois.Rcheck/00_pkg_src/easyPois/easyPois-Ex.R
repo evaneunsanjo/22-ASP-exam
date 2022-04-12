@@ -24,7 +24,6 @@ logLik(y, 10)
 
 
 
-
 cleanEx()
 nameEx("mle")
 ### * mle
@@ -39,6 +38,25 @@ flush(stderr()); flush(stdout())
 
 y = c(1:10)
 mle(y)
+
+
+
+cleanEx()
+nameEx("standardError")
+### * standardError
+
+flush(stderr()); flush(stdout())
+
+### Name: standardError
+### Title: Calculates the standard error of an MLE estimator
+### Aliases: standardError seCalculate se
+
+### ** Examples
+
+set.seed(10)
+y <- sample(x=1:10, size=10, replace=TRUE)
+standardError(y, SEtype= "basic")
+standardError(y, SEtype= "bootstrap")
 
 
 

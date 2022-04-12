@@ -1,4 +1,10 @@
+estimatePois	estimatePois
 logLik	logLik
 loglik	logLik
 mle	mle
 poismle	mle
+PoisMLE-class	PoisMLE
+Poismleclass	PoisMLE
+se	standardError
+seCalculate	standardError
+standardError	standardError

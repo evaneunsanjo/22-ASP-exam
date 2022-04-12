@@ -21,7 +21,7 @@ y = c(1:10)
 mle(y)
 }
 \seealso{
-\code{logLik}, \code{se}
+\code{logLik}, \code{standardError}
 }
 \author{
 Eunsan Jo <\email{ejo@wustl.edu}>

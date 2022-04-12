@@ -10,11 +10,12 @@
 #' @seealso \code{mle}, \code{se}
 #' @note part of easyPois package
 #' @examples
-#'set.seed(10)
-#'y <- sample(x=1:10, size=10, replace=TRUE)
-#'logLik(y, 10)
-#'
+#' set.seed(10)
+#' y <- sample(x=1:10, size=10, replace=TRUE)
+#' logLik(y, 10)
 #' @rdname logLik
+#' @include logLik.R
+#' @import methods
 #' @aliases loglik
 #' @export
 setGeneric(name="logLik",
@@ -23,7 +24,7 @@ setGeneric(name="logLik",
 )
 
 
-#' @export
+
 setMethod(f="logLik",
           definition = function(y, lambda){
 

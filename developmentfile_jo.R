@@ -61,7 +61,7 @@ mle(y)
 
 
 # stadard errors function
-se<- function(y, SEtype = c("basic", "bootstrap"), B=200){
+standardError<- function(y, SEtype = c("basic", "bootstrap"), B=200){
 
   mle <- function(y){return(sum(y)/length(y))}
 
@@ -97,10 +97,10 @@ se<- function(y, SEtype = c("basic", "bootstrap"), B=200){
   }
 }
 
-se(y, SEtype= "bootstrap", B= 300)
-se(y, SEtype= "test")
-se(y, SEtype= "bootstrap")
-se(y, SEtype= "basic")
+standardError(y, SEtype= "bootstrap", B= 300)
+standardError(y, SEtype= "test")
+standardError(y, SEtype= "bootstrap")
+standardError(y, SEtype= "basic")
 
 
 # set PoisMLE class
@@ -141,3 +141,25 @@ setValidity("PoisMLE", function(object){
 }
 )
 
+# estimatePois
+estimatePois <- function(y, lambda,
+         SEtype = c("basic", "bootstrap"), B=100){
+  MLE <- mle(y)
+  LL <- logLik(y, lambda)
+  SE <- standardError(y, SEtype, B)
+  PoisMLE_obj <- new("PoisMLE", y=y, LL=LL, MLE=MLE, SE=SE, SEtype=SEtype)
+  return(PoisMLE_obj)
+}
+#mine
+estimatePois(y, lambda = 10, SEtype= "bootstrap", B=)
+
+#rex's
+estimatePois_boot <- estimatePois(y, 2, "bootstrap")
+estimatePois_basic <- estimatePois(y, lambda = 2, SEtype= "basic")
+
+
+#### example cut from estimate poisson file
+#' @examples
+#' set.seed(10)
+#' y <- sample(x=1:10, size=10, replace=TRUE)
+#' estimatePois(y, lambda = 10, SEtype = "bootstrap")

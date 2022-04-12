@@ -25,7 +25,6 @@ part of easyPois package
 set.seed(10)
 y <- sample(x=1:10, size=10, replace=TRUE)
 logLik(y, 10)
-
 }
 \seealso{
 \code{mle}, \code{se}

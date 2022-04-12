@@ -64,7 +64,6 @@ The following object is masked from 'package:stats':
 > 
 > 
 > 
-> 
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("logLik", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
@@ -88,12 +87,36 @@ The following object is masked from 'package:stats':
 > 
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("mle", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("standardError")
+> ### * standardError
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: standardError
+> ### Title: Calculates the standard error of an MLE estimator
+> ### Aliases: standardError seCalculate se
+> 
+> ### ** Examples
+> 
+> set.seed(10)
+> y <- sample(x=1:10, size=10, replace=TRUE)
+> standardError(y, SEtype= "basic")
+[1] 0.8660254
+> standardError(y, SEtype= "bootstrap")
+[1] 0.5927618
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("standardError", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > ### * <FOOTER>
 > ###
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.21 0.05 0.26 NA NA 
+Time elapsed:  0.28 0.04 0.31 NA NA 
 > grDevices::dev.off()
 null device 
           1 

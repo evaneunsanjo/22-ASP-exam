@@ -6,11 +6,13 @@
 #'
 #' @return maximum likelihood estimator for the observed dataset y
 #' @author Eunsan Jo <\email{ejo@@wustl.edu}>
-#' @seealso \code{logLik}, \code{se}
+#' @seealso \code{logLik}, \code{standardError}
 #' @examples
 #' y = c(1:10)
 #' mle(y)
 #' @rdname mle
+#' @include  mle.R
+#' @import methods
 #' @aliases poismle
 #'
 #' @export
@@ -19,7 +21,6 @@ setGeneric(name = "mle",
            {standardGeneric("mle")}
 )
 
-#' @export
 setMethod(f = "mle",
           definition = function(y){
             if (any(y < 0)) {
