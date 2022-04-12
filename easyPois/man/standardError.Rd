@@ -2,7 +2,7 @@
 % Please edit documentation in R/standardError.R
 \name{standardError}
 \alias{standardError}
-\alias{seCalculate,}
+\alias{seCalculate}
 \alias{se}
 \title{Calculates the standard error of an MLE estimator}
 \usage{

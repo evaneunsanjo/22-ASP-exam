@@ -61,8 +61,6 @@ mle(y)
 
 
 # stadard errors function
-  # this took a good hour because I could not get the bootstrapping option to work.
-
 se<- function(y, SEtype = c("basic", "bootstrap"), B=200){
 
   mle <- function(y){return(sum(y)/length(y))}
@@ -105,4 +103,41 @@ se(y, SEtype= "bootstrap")
 se(y, SEtype= "basic")
 
 
-# class definitions
+# set PoisMLE class
+setClass(Class="PoisMLE",
+         representation = representation(
+           y = "numeric",
+           MLE = "numeric",
+           LL = "numeric",
+           SEtype = "character",
+           SE = "numeric"
+         ),
+         prototype = prototype(
+           y = numeric(),
+           MLE = numeric(),
+           LL = numeric(),
+           SEtype = character(),
+           SE = numeric()
+         )
+)
+
+setValidity("PoisMLE", function(object){
+
+  y_classtest <- is.numeric(object@y)
+  if (!y_classtest){stop("Y must be of numeric class.")}
+
+  MLE_classtest <- is.numeric(object@MLE)
+  if (!MLE_classtest){stop("MLE must be of numeric class.")}
+
+  LL_classtest <- is.numeric(object@LL)
+  if (!LL_classtest){stop("LL must be of numeric class.")}
+
+  SE_classtest <- is.numeric(object@SE)
+  if (!SE_classtest){stop("SE must be of numeric class.")}
+
+  LL_classtest <- is.numeric(object@SEtype)
+  if (!SEtype_classtest){stop("SEtype must be of character class.")}
+
+}
+)
+
