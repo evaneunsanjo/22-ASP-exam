@@ -1,165 +1,43 @@
-# I create basic R package structure using 'New project' menu
+#load necessary packages
 library(devtools)
 library(roxygen2)
 
-# creating it inside original class repository created errors, so I have
-# set the working directory to a new, exam-specific git repository
+
+# set the working directory to a new, exam-specific working directory
 setwd("C:\Users\Eunsan\22 R\exam")
 
-# add a .r file for testing functions and documenting progress (development file)
+# testing document function using built-in hello file: afterwards delete.
+devtools::document(hello)
 
-## In general, I will follow process of creating a class/function - testing it (setting examples)
-## - set methods - document them - test as a package.
-## after building each of the function below I repeat the below three steps.
-devtools::check()
+## after building relevant functions I repeat the below three steps.
 devtools::load_all()
 devtools::document()
-# After this I check the help file and dislike it, make some grammatical changes.
+devtools::check()
+
+# test loading help files
 ?logLik
 ?mle
 ?standardError
 ?estimatePois
-?'PoisMLE'
 
+#test individual functions
+set.seed(10)
+y <- sample(x=1:10, size=10, replace=TRUE)
 
-# General structure of functions are based on what we did in PSET3.
-# I begin by building a logLik function.
-      # Referencing QPMII, I use lfactorial and then exponentiate it, instead of simple factorial().
-      # other than that it is as defined in the guideline.
+logLik(y, 10)
 
-logLik <- function(y, lambda){
-
-        if (any(y < 0)) {
-          stop("For log likelihood, values of y must be greater or equal to 0")
-        }
-
-        if (lambda < 0) {
-          stop("For log likelihood, lambda must be of a value greater than 0.")
-        }
-
-        LL <- -length(y)*lambda - sum(log(exp(lfactorial(y)))) + log(lambda)*sum(y)
-
-        return(LL)
-      }
-      # testing
-      set.seed(10)
-      y <- sample(x=1:10, size=10, replace=TRUE)
-      logLik(y, 10)
-
-#mle function
-
-mle <- function(y){
-        if (any(y < 0)) {
-          stop("For maximum likelihood, values of y must be greater or equal to 0")
-        }
-
-        return(sum(y)/length(y))
-}
-  #example
-y = c(1:10)
 mle(y)
 
-
-# stadard errors function
-se<- function(y, SEtype = c("basic", "bootstrap"), B=200){
-
-  mle <- function(y){return(sum(y)/length(y))}
-
-  if (SEtype == "basic") {
-    se <- sqrt(mle(y) /length(y))
-  }
-
-  if (SEtype == "bootstrap") {
-    matrix <- replicate(B, {
-      return(sample(y, length(y), replace = T))
-    })
-
-    bootmle <- apply(matrix, 2, mle)
-    se <- sd(bootmle)
-  }
-  return(se)
-
-  if(any(y < 0)) {
-    stop("For log likelihood, values of y must be greater or equal to 0")
-  }
-
-  if(B <= 0) {
-    stop("For bootstrapping, B must be greater than 0.")
-  }
-
-  if (!(SEtype %in% c("basic", "bootstrap"))) {
-    stop("Please insert a defined method for SEtype.")
-  }
-}
-
 standardError(y, SEtype= "bootstrap", B= 300)
 standardError(y, SEtype= "test")
-standardError(y, SEtype= "bootstrap")
-standardError(y, SEtype= "basic")
 
+# test the final version of function
+estimatePois(y, lambda = 10, SEtype = "bootstrap")
+estimatePois(y, lambda = 10, SEtype= "basic")
 
-standardError(y, SEtype= "bootstrap", B= 300)
-standardError(y, SEtype= "test")
-se(y, SEtype= "bootstrap")
-se(y, SEtype= "basic")
-
-# set PoisMLE class
-setClass(Class="PoisMLE",
-         representation = representation(
-           y = "numeric",
-           MLE = "numeric",
-           LL = "numeric",
-           SEtype = "character",
-           SE = "numeric"
-         ),
-         prototype = prototype(
-           y = numeric(),
-           MLE = numeric(),
-           LL = numeric(),
-           SEtype = character(),
-           SE = numeric()
-         )
-)
-
-setValidity("PoisMLE", function(object){
-
-  y_classtest <- is.numeric(object@y)
-  if (!y_classtest){stop("Y must be of numeric class.")}
-
-  MLE_classtest <- is.numeric(object@MLE)
-  if (!MLE_classtest){stop("MLE must be of numeric class.")}
-
-  LL_classtest <- is.numeric(object@LL)
-  if (!LL_classtest){stop("LL must be of numeric class.")}
-
-  SE_classtest <- is.numeric(object@SE)
-  if (!SE_classtest){stop("SE must be of numeric class.")}
-
-  LL_classtest <- is.numeric(object@SEtype)
-  if (!SEtype_classtest){stop("SEtype must be of character class.")}
-
-}
-)
-
-# estimatePois
-estimatePois <- function(y, lambda,
-         SEtype = c("basic", "bootstrap"), B=100){
-  MLE <- mle(y)
-  LL <- logLik(y, lambda)
-  SE <- standardError(y, SEtype, B)
-  PoisMLE_obj <- new("PoisMLE", y=y, LL=LL, MLE=MLE, SE=SE, SEtype=SEtype)
-  return(PoisMLE_obj)
-}
-#mine
-estimatePois(y, lambda = 10, SEtype= "bootstrap", B=)
-
-#rex's
-estimatePois_boot <- estimatePois(y, 2, "bootstrap")
+# test plotting
 estimatePois_basic <- estimatePois(y, lambda = 2, SEtype= "basic")
+plot(estimatePois_basic)
 
-
-#### example cut from estimate poisson file
-#' @examples
-#' set.seed(10)
-#' y <- sample(x=1:10, size=10, replace=TRUE)
-#' estimatePois(y, lambda = 10, SEtype = "bootstrap")
+plotMLE <- function(y,SEtype,B=1000,lambda_width=2.5)
+  plotMLE()

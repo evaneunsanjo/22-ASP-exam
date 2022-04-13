@@ -17,4 +17,5 @@ Collate:
     'estimatePois.R'
     'logLik.R'
     'mle.R'
+    'plotMLE.R'
     'standardError.R'

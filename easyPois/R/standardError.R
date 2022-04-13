@@ -4,7 +4,7 @@
 #'
 #' @param y observed data in vector form
 #' @param SEtype method of calculating the standard error
-#' @param B number of sampling to be done from y in case of bootstrapping. The default is 200.
+#' @param B number of sampling to be done from y in case of bootstrapping. The default is 1000.
 #'
 #' @return standard error of mle
 #' @author Eunsan Jo <\email{ejo@@wustl.edu}>
@@ -22,13 +22,13 @@
 
 #' @export
 setGeneric(name="standardError",
-           def=function(y, SEtype, B=200)
+           def=function(y, SEtype, B=1000)
            {standardGeneric("standardError")}
 )
 
 
 setMethod(f="standardError",
-          definition=function(y, SEtype = c("basic", "bootstrap"), B=200){
+          definition=function(y, SEtype = c("basic", "bootstrap"), B=1000){
 
             mle <- function(y){return(sum(y)/length(y))}
 

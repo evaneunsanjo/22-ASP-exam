@@ -27,16 +27,16 @@
 #'
 #' @export
 setGeneric(name = "estimatePois",
-           def = function(y, lambda, SEtype=c("basic", "bootstrap"), B=200)
+           def = function(y, lambda, SEtype=c("basic", "bootstrap"), B=1000)
            {standardGeneric("estimatePois")}
 )
 
 
 setMethod(f = "estimatePois",
-          definition = function(y, lambda, SEtype=c("basic", "bootstrap", B=200)){
+          definition = function(y, lambda, SEtype=c("basic", "bootstrap", B=1000)){
             MLE <- mle(y)
             LL <- logLik(y, lambda)
-            SE <- standardError(y, SEtype = c("basic", "bootstrap"), B)
+            SE <- standardError(y, SEtype = c("basic", "bootstrap"), B =1000)
             estimateP <- new("PoisMLE", y=y, LL = LL, MLE = MLE, SE = SE,SEtype = SEtype)
             return(estimateP)
           }
