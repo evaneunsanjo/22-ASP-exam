@@ -12,7 +12,7 @@ RoxygenNote: 7.1.2
 Collate: 'PoisMLE.R' 'estimatePois.R' 'logLik.R' 'mle.R'
         'standardError.R'
 NeedsCompilation: no
-Packaged: 2022-04-13 02:40:19 UTC; Eunsan
+Packaged: 2022-04-13 03:00:30 UTC; Eunsan
 Author: Eunsan Jo [aut, cre]
 Maintainer: Eunsan Jo <ejo@wustl.edu>
-Built: R 4.0.3; ; 2022-04-13 02:40:25 UTC; windows
+Built: R 4.0.3; ; 2022-04-13 03:00:38 UTC; windows

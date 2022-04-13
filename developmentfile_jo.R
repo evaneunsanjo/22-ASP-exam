@@ -9,6 +9,7 @@ setwd("C:\Users\Eunsan\22 R\exam")
 # devtools::document(hello)
 
 # after building relevant functions I repeat the below three steps.
+# final check returns no errors
 devtools::load_all()
 devtools::document()
 devtools::check()
