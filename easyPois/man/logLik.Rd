@@ -23,7 +23,7 @@ part of easyPois package
 }
 \examples{
 set.seed(10)
-y <- sample(x=1:10, size=10, replace=TRUE)
+y <- rpois(1000,5)
 logLik(y, 10)
 }
 \seealso{

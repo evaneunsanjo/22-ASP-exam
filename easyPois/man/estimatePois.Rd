@@ -4,7 +4,7 @@
 \alias{estimatePois}
 \title{estimatePois function for MLE calculation}
 \usage{
-estimatePois(y, lambda, SEtype = c("basic", "bootstrap"), B = 200)
+estimatePois(y, lambda, SEtype = c("basic", "bootstrap"), B = 1000)
 }
 \arguments{
 \item{y}{Observed data in vector form}
@@ -28,7 +28,7 @@ Function for calculating log likelihood, MLE, and standard errors of a Poisson d
 }
 \examples{
 set.seed(10)
-y <- sample(x=1:10, size=10, replace=TRUE)
+y <- rpois(1000,5)
 estimatePois(y, lambda = 10, SEtype = "bootstrap")
 estimatePois(y, lambda = 10, SEtype= "basic")
 }

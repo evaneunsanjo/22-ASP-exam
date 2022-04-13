@@ -11,31 +11,32 @@
 #' @note part of easyPois package
 #' @examples
 #' set.seed(10)
-#' y <- sample(x=1:10, size=10, replace=TRUE)
+#' y <- rpois(1000,5)
 #' logLik(y, 10)
 #' @rdname logLik
 #' @include logLik.R
 #' @import methods
 #' @aliases loglik
 #' @export
+# set generic ahead of method
 setGeneric(name="logLik",
            def = function(y, lambda)
            {standardGeneric("logLik")}
 )
 
 
-
+#method for calculating log likelihood
 setMethod(f="logLik",
           definition = function(y, lambda){
-
+            # warning messages for smooth calculation
             if (any(y < 0)) {
-              stopI("For log likelihood, values of y must be greater or equal to 0")
+              stop("For log likelihood, values of y must be greater or equal to 0")
             }
 
             if (lambda < 0) {
               stop("For log likelihood, lambda must be of a value greater than 0.")
             }
-
+            # i use lfactorial and exponentiate it, referencing QPMII.
             LL <- -length(y)*lambda - sum(log(exp(lfactorial(y)))) + log(lambda)*sum(y)
 
             return(LL)

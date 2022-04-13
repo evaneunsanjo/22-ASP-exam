@@ -17,7 +17,7 @@
 #' @author Eunsan Jo
 #' @examples
 #' set.seed(10)
-#' y <- sample(x=1:10, size=10, replace=TRUE)
+#' y <- rpois(1000,5)
 #' estimatePois(y, lambda = 10, SEtype = "bootstrap")
 #' estimatePois(y, lambda = 10, SEtype= "basic")
 #' @rdname estimatePois
@@ -26,14 +26,17 @@
 #' @aliases estimatePois
 #'
 #' @export
+#'
+#sets generic function ahead of the method
 setGeneric(name = "estimatePois",
            def = function(y, lambda, SEtype=c("basic", "bootstrap"), B=1000)
            {standardGeneric("estimatePois")}
 )
 
-
+#method for calculating the final function
 setMethod(f = "estimatePois",
           definition = function(y, lambda, SEtype=c("basic", "bootstrap", B=1000)){
+            #all the expressions are from other functions in the package
             MLE <- mle(y)
             LL <- logLik(y, lambda)
             SE <- standardError(y, SEtype = c("basic", "bootstrap"), B =1000)

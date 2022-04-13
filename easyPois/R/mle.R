@@ -8,7 +8,7 @@
 #' @author Eunsan Jo <\email{ejo@@wustl.edu}>
 #' @seealso \code{logLik}, \code{standardError}
 #' @examples
-#' y = c(1:10)
+#' y <- rpois(1000,5)
 #' mle(y)
 #' @rdname mle
 #' @include  mle.R
@@ -16,15 +16,18 @@
 #' @aliases poismle
 #'
 #' @export
+#set generic ahead of method
 setGeneric(name = "mle",
            def = function(y)
            {standardGeneric("mle")}
 )
 
+#method for calculating maximum likelihood
 setMethod(f = "mle",
           definition = function(y){
+            #function stops if invalid vector is inserted
             if (any(y < 0)) {
-              stopI("For maximum likelihood, values of y must be greater or equal to 0")
+              stop("For maximum likelihood, values of y must be greater or equal to 0")
             }
 
             return(sum(y)/length(y))

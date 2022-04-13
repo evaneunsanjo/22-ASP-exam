@@ -6,14 +6,14 @@
 \alias{se}
 \title{Calculates the standard error of an MLE estimator}
 \usage{
-standardError(y, SEtype, B = 200)
+standardError(y, SEtype, B = 1000)
 }
 \arguments{
 \item{y}{observed data in vector form}
 
 \item{SEtype}{method of calculating the standard error}
 
-\item{B}{number of sampling to be done from y in case of bootstrapping. The default is 200.}
+\item{B}{number of sampling to be done from y in case of bootstrapping. The default is 1000.}
 }
 \value{
 standard error of mle
@@ -23,7 +23,7 @@ Calculates the standard error using a vector of the data with Poisson distributi
 }
 \examples{
 set.seed(10)
-y <- sample(x=1:10, size=10, replace=TRUE)
+y <- rpois(1000,5)
 standardError(y, SEtype= "basic")
 standardError(y, SEtype= "bootstrap")
 }

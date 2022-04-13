@@ -58,7 +58,7 @@ The following object is masked from 'package:stats':
 > ### ** Examples
 > 
 > set.seed(10)
-> y <- sample(x=1:10, size=10, replace=TRUE)
+> y <- rpois(1000,5)
 > estimatePois(y, lambda = 10, SEtype = "bootstrap")
  ----------- FAILURE REPORT -------------- 
  --- failure: the condition has length > 1 ---
@@ -67,14 +67,14 @@ The following object is masked from 'package:stats':
  --- package (from environment) --- 
 easyPois
  --- call from context --- 
-standardError(y, SEtype = c("basic", "bootstrap"), B)
+standardError(y, SEtype = c("basic", "bootstrap"), B = 1000)
  --- call from argument --- 
 if (SEtype == "basic") {
     se <- sqrt(mle(y)/length(y))
 }
  --- R stacktrace ---
-where 1: standardError(y, SEtype = c("basic", "bootstrap"), B)
-where 2: standardError(y, SEtype = c("basic", "bootstrap"), B)
+where 1: standardError(y, SEtype = c("basic", "bootstrap"), B = 1000)
+where 2: standardError(y, SEtype = c("basic", "bootstrap"), B = 1000)
 where 3: .local(y, lambda, SEtype)
 where 4: estimatePois(y, lambda = 10, SEtype = "bootstrap")
 where 5: estimatePois(y, lambda = 10, SEtype = "bootstrap")
@@ -84,7 +84,7 @@ where 5: estimatePois(y, lambda = 10, SEtype = "bootstrap")
  --- function from context --- 
 Method Definition:
 
-function (y, SEtype = c("basic", "bootstrap"), B = 200) 
+function (y, SEtype = c("basic", "bootstrap"), B = 1000) 
 {
     mle <- function(y) {
         return(sum(y)/length(y))
@@ -110,7 +110,7 @@ function (y, SEtype = c("basic", "bootstrap"), B = 200)
         stop("Please insert a defined method for SEtype.")
     }
 }
-<bytecode: 0x000000000965c940>
+<bytecode: 0x000000000966ceb0>
 <environment: namespace:easyPois>
 
 Signatures:

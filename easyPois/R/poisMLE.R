@@ -18,6 +18,8 @@
 #' @importFrom methods callNextMethod new
 #' @aliases Poismleclass
 #' @export
+# I belatedly inserted a lot of 'importsFrom' above according to advices from 'check' function
+# PoisMLE as S4 class
 setClass(Class="PoisMLE",
          representation = representation(
            y = "numeric",
@@ -35,6 +37,7 @@ setClass(Class="PoisMLE",
          )
 )
 
+# classchecks that prevents any wrong values from being processed
 #' @export
 setValidity("PoisMLE", function(object){
 
@@ -56,6 +59,7 @@ setValidity("PoisMLE", function(object){
 }
 )
 
+#' @export
 setMethod("initialize", "PoisMLE",
           function(.Object, ...){
             value=callNextMethod()

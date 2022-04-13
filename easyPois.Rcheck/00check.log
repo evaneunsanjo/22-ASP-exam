@@ -18,11 +18,7 @@
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
-* checking DESCRIPTION meta-information ... WARNING
-Non-standard license specification:
-  `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-  license
-Standardizable: FALSE
+* checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
@@ -39,12 +35,7 @@ Standardizable: FALSE
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-estimatePois,ANY: no visible binding for global variable 'B'
-logLik,ANY: no visible global function definition for 'stopI'
-mle,ANY: no visible global function definition for 'stopI'
-Undefined global functions or variables:
-  B stopI
+* checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -52,6 +43,7 @@ Undefined global functions or variables:
 * checking for missing documentation entries ... WARNING
 Undocumented S4 methods:
   generic 'estimatePois' and siglist 'ANY'
+  generic 'initialize' and siglist 'PoisMLE'
   generic 'logLik' and siglist 'ANY'
   generic 'mle' and siglist 'ANY'
   generic 'standardError' and siglist 'ANY'
@@ -75,7 +67,7 @@ The error most likely occurred in:
 > ### ** Examples
 > 
 > set.seed(10)
-> y <- sample(x=1:10, size=10, replace=TRUE)
+> y <- rpois(1000,5)
 > estimatePois(y, lambda = 10, SEtype = "bootstrap")
  ----------- FAILURE REPORT -------------- 
  --- failure: the condition has length > 1 ---
@@ -84,14 +76,14 @@ The error most likely occurred in:
  --- package (from environment) --- 
 easyPois
  --- call from context --- 
-standardError(y, SEtype = c("basic", "bootstrap"), B)
+standardError(y, SEtype = c("basic", "bootstrap"), B = 1000)
  --- call from argument --- 
 if (SEtype == "basic") {
     se <- sqrt(mle(y)/length(y))
 }
  --- R stacktrace ---
-where 1: standardError(y, SEtype = c("basic", "bootstrap"), B)
-where 2: standardError(y, SEtype = c("basic", "bootstrap"), B)
+where 1: standardError(y, SEtype = c("basic", "bootstrap"), B = 1000)
+where 2: standardError(y, SEtype = c("basic", "bootstrap"), B = 1000)
 where 3: .local(y, lambda, SEtype)
 where 4: estimatePois(y, lambda = 10, SEtype = "bootstrap")
 where 5: estimatePois(y, lambda = 10, SEtype = "bootstrap")
@@ -101,7 +93,7 @@ where 5: estimatePois(y, lambda = 10, SEtype = "bootstrap")
  --- function from context --- 
 Method Definition:
 
-function (y, SEtype = c("basic", "bootstrap"), B = 200) 
+function (y, SEtype = c("basic", "bootstrap"), B = 1000) 
 {
     mle <- function(y) {
         return(sum(y)/length(y))
@@ -127,7 +119,7 @@ function (y, SEtype = c("basic", "bootstrap"), B = 200)
         stop("Please insert a defined method for SEtype.")
     }
 }
-<bytecode: 0x000000000965c940>
+<bytecode: 0x000000000966ceb0>
 <environment: namespace:easyPois>
 
 Signatures:
@@ -143,4 +135,4 @@ Execution halted
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 1 ERROR, 2 WARNINGs, 1 NOTE
+Status: 1 ERROR, 1 WARNING
