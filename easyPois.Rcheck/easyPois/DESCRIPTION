@@ -14,7 +14,7 @@ RoxygenNote: 7.1.2
 Collate: 'PoisMLE.R' 'estimatePois.R' 'logLik.R' 'mle.R'
         'standardError.R'
 NeedsCompilation: no
-Packaged: 2022-04-12 23:27:58 UTC; Eunsan
+Packaged: 2022-04-13 00:00:13 UTC; Eunsan
 Author: First Last [aut, cre] (YOUR-ORCID-ID)
 Maintainer: First Last <first.last@example.com>
-Built: R 4.0.3; ; 2022-04-12 23:28:05 UTC; windows
+Built: R 4.0.3; ; 2022-04-13 00:00:21 UTC; windows

@@ -50,7 +50,7 @@ setValidity("PoisMLE", function(object){
   SE_classtest <- is.numeric(object@SE)
   if (!SE_classtest){stop("SE must be of numeric class.")}
 
-  LL_classtest <- is.numeric(object@SEtype)
+  SEtype_classtest <- is.character(object@SEtype)
   if (!SEtype_classtest){stop("SEtype must be of character class.")}
 
 }

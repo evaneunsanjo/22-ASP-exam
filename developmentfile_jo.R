@@ -61,15 +61,12 @@ mle(y)
 
 
 # stadard errors function
-standardError<- function(y, SEtype = c("basic", "bootstrap"), B=200){
+se<- function(y, SEtype = c("basic", "bootstrap"), B=200){
 
   mle <- function(y){return(sum(y)/length(y))}
 
   if (SEtype == "basic") {
     se <- sqrt(mle(y) /length(y))
-
-    return(se)
-
   }
 
   if (SEtype == "bootstrap") {
@@ -78,11 +75,9 @@ standardError<- function(y, SEtype = c("basic", "bootstrap"), B=200){
     })
 
     bootmle <- apply(matrix, 2, mle)
-    bootse <- sd(bootmle)
-
-    return(bootse)
-
+    se <- sd(bootmle)
   }
+  return(se)
 
   if(any(y < 0)) {
     stop("For log likelihood, values of y must be greater or equal to 0")
@@ -102,6 +97,11 @@ standardError(y, SEtype= "test")
 standardError(y, SEtype= "bootstrap")
 standardError(y, SEtype= "basic")
 
+
+standardError(y, SEtype= "bootstrap", B= 300)
+standardError(y, SEtype= "test")
+se(y, SEtype= "bootstrap")
+se(y, SEtype= "basic")
 
 # set PoisMLE class
 setClass(Class="PoisMLE",

@@ -45,84 +45,81 @@ The following object is masked from 'package:stats':
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 > cleanEx()
-> nameEx("logLik")
-> ### * logLik
+> nameEx("estimatePois")
+> ### * estimatePois
 > 
 > flush(stderr()); flush(stdout())
 > 
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: logLik
-> ### Title: Log Likelihood of a Poisson Distribution
-> ### Aliases: logLik loglik
+> ### Name: estimatePois
+> ### Title: estimatePois function for MLE calculation
+> ### Aliases: estimatePois
 > 
 > ### ** Examples
 > 
 > set.seed(10)
 > y <- sample(x=1:10, size=10, replace=TRUE)
-> logLik(y, 10)
-[1] -25.47247
-> 
-> 
-> 
-> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-> base::cat("logLik", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
-> cleanEx()
-> nameEx("mle")
-> ### * mle
-> 
-> flush(stderr()); flush(stdout())
-> 
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: mle
-> ### Title: Returns Maximum Likelihood of a Poisson Distribution
-> ### Aliases: mle poismle
-> 
-> ### ** Examples
-> 
-> y = c(1:10)
-> mle(y)
-[1] 5.5
-> 
-> 
-> 
-> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-> base::cat("mle", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
-> cleanEx()
-> nameEx("standardError")
-> ### * standardError
-> 
-> flush(stderr()); flush(stdout())
-> 
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: standardError
-> ### Title: Calculates the standard error of an MLE estimator
-> ### Aliases: standardError seCalculate se
-> 
-> ### ** Examples
-> 
-> set.seed(10)
-> y <- sample(x=1:10, size=10, replace=TRUE)
-> standardError(y, SEtype= "basic")
-[1] 0.8660254
-> standardError(y, SEtype= "bootstrap")
-[1] 0.5927618
-> 
-> 
-> 
-> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
-> base::cat("standardError", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
-> ### * <FOOTER>
-> ###
-> cleanEx()
-> options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.28 0.04 0.31 NA NA 
-> grDevices::dev.off()
-null device 
-          1 
-> ###
-> ### Local variables: ***
-> ### mode: outline-minor ***
-> ### outline-regexp: "\\(> \\)?### [*]+" ***
-> ### End: ***
-> quit('no')
+> estimatePois(y, lambda = 10, SEtype = "bootstrap")
+ ----------- FAILURE REPORT -------------- 
+ --- failure: the condition has length > 1 ---
+ --- srcref --- 
+: 
+ --- package (from environment) --- 
+easyPois
+ --- call from context --- 
+standardError(y, SEtype = c("basic", "bootstrap"), B)
+ --- call from argument --- 
+if (SEtype == "basic") {
+    se <- sqrt(mle(y)/length(y))
+}
+ --- R stacktrace ---
+where 1: standardError(y, SEtype = c("basic", "bootstrap"), B)
+where 2: standardError(y, SEtype = c("basic", "bootstrap"), B)
+where 3: .local(y, lambda, SEtype)
+where 4: estimatePois(y, lambda = 10, SEtype = "bootstrap")
+where 5: estimatePois(y, lambda = 10, SEtype = "bootstrap")
+
+ --- value of length: 2 type: logical ---
+[1]  TRUE FALSE
+ --- function from context --- 
+Method Definition:
+
+function (y, SEtype = c("basic", "bootstrap"), B = 200) 
+{
+    mle <- function(y) {
+        return(sum(y)/length(y))
+    }
+    if (SEtype == "basic") {
+        se <- sqrt(mle(y)/length(y))
+    }
+    if (SEtype == "bootstrap") {
+        matrix <- replicate(B, {
+            return(sample(y, length(y), replace = T))
+        })
+        bootmle <- apply(matrix, 2, mle)
+        se <- sd(bootmle)
+    }
+    return(se)
+    if (any(y < 0)) {
+        stop("For log likelihood, values of y must be greater or equal to 0")
+    }
+    if (B <= 0) {
+        stop("For bootstrapping, B must be greater than 0.")
+    }
+    if (!(SEtype %in% c("basic", "bootstrap"))) {
+        stop("Please insert a defined method for SEtype.")
+    }
+}
+<bytecode: 0x000000000965c940>
+<environment: namespace:easyPois>
+
+Signatures:
+        y        
+target  "integer"
+defined "ANY"    
+ --- function search by body ---
+S4 Method standardError:easyPois defined in namespace easyPois with signature ANY has this body.
+ ----------- END OF FAILURE REPORT -------------- 
+Error in if (SEtype == "basic") { : the condition has length > 1
+Calls: estimatePois ... estimatePois -> .local -> standardError -> standardError
+Execution halted

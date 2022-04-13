@@ -34,9 +34,6 @@ setMethod(f="standardError",
 
             if (SEtype == "basic") {
               se <- sqrt(mle(y) /length(y))
-
-              return(se)
-
             }
 
             if (SEtype == "bootstrap") {
@@ -45,11 +42,9 @@ setMethod(f="standardError",
               })
 
               bootmle <- apply(matrix, 2, mle)
-              bootse <- sd(bootmle)
-
-              return(bootse)
-
+              se <- sd(bootmle)
             }
+            return(se)
 
             if(any(y < 0)) {
               stop("For log likelihood, values of y must be greater or equal to 0")

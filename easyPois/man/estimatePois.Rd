@@ -26,6 +26,12 @@ An object of class PoisMLE
 \description{
 Function for calculating log likelihood, MLE, and standard errors of a Poisson distribution data
 }
+\examples{
+set.seed(10)
+y <- sample(x=1:10, size=10, replace=TRUE)
+estimatePois(y, lambda = 10, SEtype = "bootstrap")
+estimatePois(y, lambda = 10, SEtype= "basic")
+}
 \author{
 Eunsan Jo
 }

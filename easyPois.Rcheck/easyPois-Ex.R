@@ -19,6 +19,28 @@ library('easyPois')
 base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 cleanEx()
+nameEx("estimatePois")
+### * estimatePois
+
+flush(stderr()); flush(stdout())
+
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+### Name: estimatePois
+### Title: estimatePois function for MLE calculation
+### Aliases: estimatePois
+
+### ** Examples
+
+set.seed(10)
+y <- sample(x=1:10, size=10, replace=TRUE)
+estimatePois(y, lambda = 10, SEtype = "bootstrap")
+estimatePois(y, lambda = 10, SEtype= "basic")
+
+
+
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("estimatePois", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+cleanEx()
 nameEx("logLik")
 ### * logLik
 

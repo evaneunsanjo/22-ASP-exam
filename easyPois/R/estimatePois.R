@@ -15,7 +15,11 @@
 #' \item{SEtype}{The method used to calculate the standard error}
 #'
 #' @author Eunsan Jo
-
+#' @examples
+#' set.seed(10)
+#' y <- sample(x=1:10, size=10, replace=TRUE)
+#' estimatePois(y, lambda = 10, SEtype = "bootstrap")
+#' estimatePois(y, lambda = 10, SEtype= "basic")
 #' @rdname estimatePois
 #' @include estimatePois.R
 #' @import methods
