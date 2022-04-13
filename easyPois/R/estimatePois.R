@@ -17,7 +17,7 @@
 #' @author Eunsan Jo
 #' @examples
 #' set.seed(10)
-#' y <- rpois(1000,5)
+#' y <- sample(x=1:1000, size=1000, replace=TRUE)
 #' estimatePois(y, lambda = 10, SEtype = "bootstrap")
 #' estimatePois(y, lambda = 10, SEtype= "basic")
 #' @rdname estimatePois

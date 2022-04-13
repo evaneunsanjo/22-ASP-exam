@@ -21,13 +21,13 @@ devtools::check()
 
 #test individual functions
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:1000, size=1000, replace=TRUE)
 logLik(y, 10)
 
 mle(y)
 
 standardError(y, SEtype= "bootstrap", B= 300)
-standardError(y, SEtype= "test")
+standardError(y, SEtype= "basic")
 
 # test the final version of function
 estimatePois(y, lambda = 10, SEtype = "bootstrap")
