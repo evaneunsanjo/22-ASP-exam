@@ -10,7 +10,7 @@
 #' @author Eunsan Jo <\email{ejo@@wustl.edu}>
 #' @examples
 #' set.seed(10)
-#' y <- sample(x=1:1000, size=1000, replace=TRUE)
+#' y <- sample(x=1:10, size=2000, replace=TRUE)
 #' standardError(y, SEtype= "basic")
 #' standardError(y, SEtype= "bootstrap")
 #' @rdname standardError

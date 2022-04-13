@@ -19,7 +19,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 estimatePois(y, lambda = 10, SEtype = "bootstrap")
 estimatePois(y, lambda = 10, SEtype= "basic")
 
@@ -38,7 +38,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 logLik(y, 10)
 
 
@@ -55,7 +55,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 mle(y)
 
 
@@ -73,7 +73,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 standardError(y, SEtype= "basic")
 standardError(y, SEtype= "bootstrap")
 

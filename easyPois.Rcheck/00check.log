@@ -67,7 +67,7 @@ The error most likely occurred in:
 > ### ** Examples
 > 
 > set.seed(10)
-> y <- rpois(1000,5)
+> y <- sample(x=1:10, size=2000, replace=TRUE)
 > estimatePois(y, lambda = 10, SEtype = "bootstrap")
  ----------- FAILURE REPORT -------------- 
  --- failure: the condition has length > 1 ---
@@ -119,7 +119,7 @@ function (y, SEtype = c("basic", "bootstrap"), B = 1000)
         stop("Please insert a defined method for SEtype.")
     }
 }
-<bytecode: 0x000000000966ceb0>
+<bytecode: 0x000000000965ca78>
 <environment: namespace:easyPois>
 
 Signatures:

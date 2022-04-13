@@ -8,7 +8,7 @@
 #' @author Eunsan Jo <\email{ejo@@wustl.edu}>
 #' @seealso \code{logLik}, \code{standardError}
 #' @examples
-#' y <- sample(x=1:1000, size=1000, replace=TRUE)
+#' y <- sample(x=1:10, size=2000, replace=TRUE)
 #' mle(y)
 #' @rdname mle
 #' @include  mle.R

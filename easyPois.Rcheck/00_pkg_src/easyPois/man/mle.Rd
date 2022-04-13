@@ -17,7 +17,7 @@ maximum likelihood estimator for the observed dataset y
 Calculates the maximum likelihood estimator for the given dataset
 }
 \examples{
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 mle(y)
 }
 \seealso{

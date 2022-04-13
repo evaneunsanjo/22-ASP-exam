@@ -21,8 +21,8 @@ devtools::check()
 
 #test individual functions
 set.seed(10)
-y <- sample(x=1:1000, size=1000, replace=TRUE)
-logLik(y, 10)
+y <- sample(x=1:10, size=2000, replace=TRUE)
+logLik(y, 8)
 
 mle(y)
 

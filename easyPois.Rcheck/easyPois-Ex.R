@@ -32,7 +32,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### ** Examples
 
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 estimatePois(y, lambda = 10, SEtype = "bootstrap")
 estimatePois(y, lambda = 10, SEtype= "basic")
 
@@ -54,7 +54,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### ** Examples
 
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 logLik(y, 10)
 
 
@@ -74,7 +74,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 mle(y)
 
 
@@ -95,7 +95,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### ** Examples
 
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 standardError(y, SEtype= "basic")
 standardError(y, SEtype= "bootstrap")
 

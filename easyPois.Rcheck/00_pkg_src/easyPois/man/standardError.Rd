@@ -23,7 +23,7 @@ Calculates the standard error using a vector of the data with Poisson distributi
 }
 \examples{
 set.seed(10)
-y <- rpois(1000,5)
+y <- sample(x=1:10, size=2000, replace=TRUE)
 standardError(y, SEtype= "basic")
 standardError(y, SEtype= "bootstrap")
 }

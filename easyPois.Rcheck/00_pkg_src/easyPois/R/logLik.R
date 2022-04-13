@@ -11,7 +11,7 @@
 #' @note part of easyPois package
 #' @examples
 #' set.seed(10)
-#' y <- rpois(1000,5)
+#' y <- sample(x=1:10, size=2000, replace=TRUE)
 #' logLik(y, 10)
 #' @rdname logLik
 #' @include logLik.R
