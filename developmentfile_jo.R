@@ -14,7 +14,7 @@ devtools::document()
 devtools::check()
 
 # test loading help files
-?logLik
+?loglik
 ?mle
 ?standardError
 ?estimatePois

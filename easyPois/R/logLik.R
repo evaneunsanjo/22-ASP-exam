@@ -25,7 +25,7 @@ setGeneric(name="logLik",
 )
 
 
-#method for calculating log likelihood
+# method for calculating log likelihood
 setMethod(f="logLik",
           definition = function(y, lambda){
             # warning messages for smooth calculation

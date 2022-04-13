@@ -39,9 +39,9 @@ setMethod(f = "estimatePois",
             #all the expressions are from other functions in the package
             MLE <- mle(y)
             LL <- logLik(y, lambda)
-            SE <- standardError(y, SEtype = c("basic", "bootstrap"), B =1000)
-            estimateP <- new("PoisMLE", y=y, LL = LL, MLE = MLE, SE = SE,SEtype = SEtype)
-            return(estimateP)
+            SE <- standardError(y, SEtype, B =1000)
+
+            return(new("PoisMLE", y=y, LL = LL, MLE = MLE, SE = SE,SEtype = SEtype))
           }
 )
 
